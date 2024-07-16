@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="userForm">
+            <label for="userId">User ID:</label>
+            <input type="text" id="userId" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="todoSection" style="display:none;">
+            <h2>Tasks for <span id="displayUserId"></span></h2>
+            <form id="todoForm">
+                <input type="text" id="taskInput" placeholder="New Task" required>
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime" required>
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime" required>
+                <button type="submit">Add Task</button>
+            </form>
+            <ul id="todoList"></ul>
+            <button id="sendListBtn">Send To-Do List</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userId = document.getElementById('userId').value;
+            document.getElementById('displayUserId').innerText = userId;
+            document.getElementById('userForm').style.display = 'none';
+            document.getElementById('todoSection').style.display = 'block';
+        });
+
+        document.getElementById('todoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const taskInput = document.getElementById('taskInput');
+            const startTimeInput = document.getElementById('startTime');
+            const endTimeInput = document.getElementById('endTime');
+            const task = taskInput.value;
+            const startTime = startTimeInput.value;
+            const endTime = endTimeInput.value;
+            if (task && startTime && endTime) {
+                const li = document.createElement('li');
+                li.textContent = `${task} (from ${startTime} to ${endTime})`;
+                document.getElementById('todoList').appendChild(li);
+                taskInput.value = '';
+                startTimeInput.value = '';
+                endTimeInput.value = '';
+            }
+        });
+
+        document.getElementById('sendListBtn').addEventListener('click', function() {
+            const userId = document.getElementById('userId').value;
+            const tasks = [];
+            document.querySelectorAll('#todoList li').forEach(li => tasks.push(li.textContent));
+            alert(`Tasks for ${userId}:\n${tasks.join('\n')}`);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.task.pending {
+    background-color: #f9f9f9;
+}
+
+.task.completed {
+    background-color: #d4edda;
+}
+
+.toggle-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+.toggle-button.pending {
+    background-color: #f0ad4e;
+    color: white;
+}
+
+.toggle-button.completed {
+    background-color: #5cb85c;
+    color: white;
+}
